@@ -1,11 +1,11 @@
 {
-    "name": "webpack",
+    "name": "webpack-react-test",
     "version": "1.0.0",
     "description": "",
     "scripts": {
         "build:dev": "MODE=development webpack --config config/webpack/webpack.config.ts",
         "build:prod": "MODE=production webpack --config config/webpack/webpack.config.ts",
-        "dev": "ts-node ./bin/dev.ts",
+        "dev": "tsc --project bin/tsconfig.dev.json && node ./bin/build/bin/src/dev.js",
         "build": "npm run build:prod"
     },
     "keywords": [],

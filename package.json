@@ -5,7 +5,7 @@
     "scripts": {
         "build:dev": "MODE=development webpack --config config/webpack/webpack.config.ts",
         "build:prod": "MODE=production webpack --config config/webpack/webpack.config.ts",
-        "dev": "tsc --project bin/tsconfig.dev.json && node ./bin/build/bin/src/dev.js",
+        "dev": "tsc --project bin/tsconfig.dev.json && node ./bin/build/bin/src/dev.js && node build/server/bundle.js",
         "build": "npm run build:prod"
     },
     "keywords": [],

@@ -1,0 +1,10 @@
+.App {
+    border-radius: 6px;
+    padding: 14px;
+    border: 1px solid black;
+    text-align: center;
+    cursor: pointer;
+    user-select: none;
+    background-color: rgb(70, 209, 255);
+    font-weight: 700;
+}

@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import styles from './App.module.css';
 
 const App = () => {
     const [counter, setCounter] = useState(0);
@@ -6,7 +7,11 @@ const App = () => {
         setCounter((count) => count + 1);
     };
 
-    return <div onClick={handleClick}>Test app component. Count = {counter}</div>;
+    return (
+        <div onClick={handleClick} className={styles.App}>
+            This is App component. Count = {counter}
+        </div>
+    );
 };
 
 export default App;

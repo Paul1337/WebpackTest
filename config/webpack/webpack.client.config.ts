@@ -27,7 +27,7 @@ const config: webpack.Configuration = {
                     {
                         loader: 'ts-loader',
                         options: {
-                            configFile: path.resolve(__dirname, '../typescript/tsconfig.webpack.json'),
+                            configFile: path.resolve(__dirname, '../../tsconfig.webpack.json'),
                         },
                     },
                 ],

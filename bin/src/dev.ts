@@ -1,10 +1,14 @@
 import webpack from 'webpack';
-import webpackConfigurations from '../../config/webpack/webpack.config';
+import express from 'express';
+
+import webpackConfigurations from '../../webpack.config';
 
 const [clientConfig, serverConfig] = webpackConfigurations;
 
+console.log('Server config:', clientConfig);
+
 const clientCompiler = webpack(clientConfig);
-const serverCompiler = webpack(clientConfig);
+const serverCompiler = webpack(serverConfig);
 
 console.log('Running dev compilation..');
 

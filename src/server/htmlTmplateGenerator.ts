@@ -9,9 +9,7 @@ export const generateHtmlTemplate = (rootHTML: string, bundleName: string = 'bun
             <script defer src="/static/${bundleName}"></script>
         </head>
         <body>
-            <div id="root">
-                ${rootHTML}
-            </div>
+            <div id="root">${rootHTML}</div>
         </body>
     </html>
 `;

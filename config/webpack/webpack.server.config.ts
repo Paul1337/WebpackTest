@@ -19,10 +19,10 @@ const config: webpack.Configuration = {
     resolve: {
         extensions: ['.js', '.jsx', '.ts', '.tsx'],
     },
-    entry: [path.resolve(process.cwd(), 'src/server/index.tsx'), 'webpack-hot-middleware/client'],
+    entry: path.resolve(__dirname, '../../src/server/index.tsx'),
     output: {
         filename: 'bundle.js',
-        path: path.resolve(process.cwd(), 'build/server'),
+        path: path.resolve(__dirname, '../../build/server'),
         clean: true,
     },
     module: {
@@ -36,11 +36,7 @@ const config: webpack.Configuration = {
                         //     configFile: path.resolve(process.cwd(), 'tsconfig.webpack.json'),
                         // },
                         options: {
-                            configFile: path.resolve(process.cwd(), 'tsconfig.webpack.json'),
-                            getCustomTransformers: () => ({
-                                before: [IS_DEV && ReactRefreshTypeScript()].filter(Boolean),
-                            }),
-                            transpileOnly: IS_DEV,
+                            configFile: path.resolve(__dirname, '../../tsconfig.webpack.json'),
                         },
                     },
                 ],

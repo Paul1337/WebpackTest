@@ -13,10 +13,10 @@ const config: webpack.Configuration = {
     resolve: {
         extensions: ['.js', '.jsx', '.ts', '.tsx'],
     },
-    entry: path.resolve(__dirname, '../../src/client/index.tsx'),
+    entry: path.resolve(process.cwd(), 'src/client/index.tsx'),
     output: {
         filename: BUILD_MODE === EBuildMode.Production ? 'bundle.[contenthash].js' : 'bundle.js',
-        path: path.resolve(__dirname, '../../build/client'),
+        path: path.resolve(process.cwd(), 'build/client'),
         clean: true,
         publicPath: '/public',
     },
@@ -28,7 +28,7 @@ const config: webpack.Configuration = {
                     {
                         loader: 'ts-loader',
                         options: {
-                            configFile: path.resolve(__dirname, '../../tsconfig.webpack.json'),
+                            configFile: path.resolve(process.cwd(), 'tsconfig.webpack.json'),
                         },
                     },
                 ],

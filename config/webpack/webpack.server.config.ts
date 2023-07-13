@@ -19,10 +19,10 @@ const config: webpack.Configuration = {
     resolve: {
         extensions: ['.js', '.jsx', '.ts', '.tsx'],
     },
-    entry: path.resolve(__dirname, '../../src/server/index.tsx'),
+    entry: path.resolve(process.cwd(), 'src/server/index.tsx'),
     output: {
         filename: 'bundle.js',
-        path: path.resolve(__dirname, '../../build/server'),
+        path: path.resolve(process.cwd(), 'build/server'),
         clean: true,
     },
     module: {
@@ -36,7 +36,7 @@ const config: webpack.Configuration = {
                         //     configFile: path.resolve(process.cwd(), 'tsconfig.webpack.json'),
                         // },
                         options: {
-                            configFile: path.resolve(__dirname, '../../tsconfig.webpack.json'),
+                            configFile: path.resolve(process.cwd(), 'tsconfig.webpack.json'),
                         },
                     },
                 ],

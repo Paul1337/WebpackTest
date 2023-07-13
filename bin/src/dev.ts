@@ -1,26 +1,23 @@
 import webpack from 'webpack';
-import express from 'express';
+import nodemon from 'nodemon';
+import path from 'path';
 
 import webpackConfigurations from '../../webpack.config';
-import webpackDevMiddleware from 'webpack-dev-middleware';
-import webpackHotMiddleware from 'webpack-hot-middleware';
-import express from 'express';
 
-const [clientConfig, serverConfig] = webpackConfigurations;
-
-console.log('Server config:', clientConfig);
-
-const clientCompiler = webpack(clientConfig);
-const serverCompiler = webpack(serverConfig);
+const compiler = webpack(webpackConfigurations);
 
 console.log('Running dev compilation..');
 
-clientCompiler.run((err) => {
-    if (err) return console.error('Client compiler error:', err);
-    console.log('Client compilation successful');
-});
+compiler.run((err) => {
+    if (err) return console.error('Compiler error:', err);
 
-serverCompiler.run((err) => {
-    if (err) return console.error('Server compiler error:', err);
-    console.log('Server compilation successful');
+    compiler.watch({}, (err) => {
+        if (err) return console.error('Compilation failed:', err);
+        console.log('Compilation finished successfully');
+    });
+
+    nodemon({
+        script: path.resolve(process.cwd(), 'build/server/bundle.js'),
+        watch: [path.resolve(process.cwd(), 'build/server')],
+    });
 });

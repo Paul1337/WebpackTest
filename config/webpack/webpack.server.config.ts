@@ -1,6 +1,8 @@
 import webpack from 'webpack';
 import path from 'path';
 import nodeExternals from 'webpack-node-externals';
+import ReactRefreshTypeScript from 'react-refresh-typescript';
+import ReactRefreshWebpackPlugin from '@pmmmwh/react-refresh-webpack-plugin';
 
 enum EBuildMode {
     Production = 'production',
@@ -8,6 +10,7 @@ enum EBuildMode {
 }
 
 const BUILD_MODE = process.env.MODE as EBuildMode;
+const IS_DEV = BUILD_MODE === EBuildMode.Development;
 
 const config: webpack.Configuration = {
     target: 'node',
@@ -16,7 +19,7 @@ const config: webpack.Configuration = {
     resolve: {
         extensions: ['.js', '.jsx', '.ts', '.tsx'],
     },
-    entry: path.resolve(process.cwd(), 'src/server/index.tsx'),
+    entry: [path.resolve(process.cwd(), 'src/server/index.tsx'), 'webpack-hot-middleware/client'],
     output: {
         filename: 'bundle.js',
         path: path.resolve(process.cwd(), 'build/server'),
@@ -29,8 +32,15 @@ const config: webpack.Configuration = {
                 use: [
                     {
                         loader: 'ts-loader',
+                        // options: {
+                        //     configFile: path.resolve(process.cwd(), 'tsconfig.webpack.json'),
+                        // },
                         options: {
                             configFile: path.resolve(process.cwd(), 'tsconfig.webpack.json'),
+                            getCustomTransformers: () => ({
+                                before: [IS_DEV && ReactRefreshTypeScript()].filter(Boolean),
+                            }),
+                            transpileOnly: IS_DEV,
                         },
                     },
                 ],
@@ -41,6 +51,10 @@ const config: webpack.Configuration = {
             },
         ],
     },
+    plugins: [
+        IS_DEV && new ReactRefreshWebpackPlugin(),
+        IS_DEV && new webpack.HotModuleReplacementPlugin(),
+    ].filter(Boolean),
 };
 
 export default config;

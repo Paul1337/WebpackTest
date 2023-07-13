@@ -18,6 +18,7 @@ const config: webpack.Configuration = {
         filename: BUILD_MODE === EBuildMode.Production ? 'bundle.[contenthash].js' : 'bundle.js',
         path: path.resolve(process.cwd(), 'build/client'),
         clean: true,
+        publicPath: '/public',
     },
     module: {
         rules: [
